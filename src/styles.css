@@ -2,3 +2,38 @@
   font-family: sans-serif;
   text-align: center;
 }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+button {
+  cursor: pointer;
+}
+.number-picker {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 0.5rem;
+  max-width: 25rem;
+  margin: 1rem auto;
+}
+.toggle-button[aria-pressed="true"] {
+  background-color: #444;
+  color: #fff;
+}
+.number-picker-options {
+  max-width: 25rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  margin: 1rem auto;
+}
+.number-picker-options select {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}

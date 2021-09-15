@@ -1,25 +1,19 @@
-import { useState } from "react";
-
-interface toggleButtonProps {
+interface ToggleButtonProps {
   value: string;
+  pressed: boolean;
+  onClick: (event: React.MouseEvent) => void;
 }
 
-function ToggleButton(props: toggleButtonProps) {
+function ToggleButton(props: ToggleButtonProps) {
   const { value } = props;
-
-  const [pressed, setPressed] = useState<boolean>(false);
-
-  function handleToggleButtonClick(event: React.MouseEvent) {
-    setPressed(!pressed);
-  }
 
   return (
     <button
       type="button"
       className="toggle-button"
       value={value}
-      aria-pressed={pressed}
-      onClick={handleToggleButtonClick}
+      aria-pressed={props.pressed}
+      onClick={props.onClick}
     >
       {value}
     </button>
