@@ -1,11 +1,14 @@
 interface ToggleButtonGroupProps {
   children: React.ReactNode;
   label: string;
+  className: string;
 }
 
 function ToggleButtonGroup(props: ToggleButtonGroupProps) {
+  var className = `toggle-button-group ${props.className}`;
+
   return (
-    <div className="toggle-button-group" role="group" aria-label={props.label}>
+    <div className={className} role="group" aria-label={props.label}>
       {props.children}
     </div>
   );
