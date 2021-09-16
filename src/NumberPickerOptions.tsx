@@ -1,16 +1,33 @@
+import { useEffect } from "react";
+
 interface NumberPickerOptionsProps {
+  pickedNumbers: number[];
   selectMax: number;
   qtyOfNums: number;
   setSelectMax: (num: number) => void;
   setQtyOfNums: (num: number) => void;
+  reset: () => void;
 }
 
 function NumberPickerOptions(props: NumberPickerOptionsProps) {
-  const { selectMax, qtyOfNums, setSelectMax, setQtyOfNums } = props;
+  const {
+    pickedNumbers,
+    selectMax,
+    qtyOfNums,
+    setSelectMax,
+    setQtyOfNums,
+    reset
+  } = props;
 
-  function createNumberSelectOptions(num: number) {
+  useEffect(() => {
+    if (pickedNumbers.length > selectMax) {
+      reset();
+    }
+  });
+
+  function createNumberSelectOptions(minNum: number, maxNum: number) {
     let numberOptions = [];
-    for (let i = 1; i <= num; i++) {
+    for (let i = minNum; i <= maxNum; i++) {
       numberOptions.push(
         <option key={`${i}`} value={`${i}`}>
           {i}
@@ -18,6 +35,10 @@ function NumberPickerOptions(props: NumberPickerOptionsProps) {
       );
     }
     return numberOptions;
+  }
+
+  function handleSelectMax(event: React.ChangeEvent) {
+    setSelectMax(Number((event.target as HTMLSelectElement).value));
   }
 
   return (
@@ -29,11 +50,9 @@ function NumberPickerOptions(props: NumberPickerOptionsProps) {
       <select
         id="quanity-to-select"
         value={selectMax}
-        onChange={(event) => {
-          setSelectMax(Number(event.target.value));
-        }}
+        onChange={handleSelectMax}
       >
-        {createNumberSelectOptions(qtyOfNums)}
+        {createNumberSelectOptions(1, qtyOfNums - 1)}
       </select>
       out of
       <label htmlFor="quanity-of-total-numbers" className="sr-only">
@@ -46,7 +65,7 @@ function NumberPickerOptions(props: NumberPickerOptionsProps) {
           setQtyOfNums(Number(event.target.value));
         }}
       >
-        {createNumberSelectOptions(99)}
+        {createNumberSelectOptions(selectMax + 1, 99)}
       </select>
       numbers
     </div>
