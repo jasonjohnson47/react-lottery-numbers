@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 interface NumberPickerOptionsProps {
-  pickedNumbers: number[];
+  currSelectedNumbers: number[];
   selectMax: number;
   qtyOfNums: number;
   setSelectMax: (num: number) => void;
@@ -11,7 +11,7 @@ interface NumberPickerOptionsProps {
 
 function NumberPickerOptions(props: NumberPickerOptionsProps) {
   const {
-    pickedNumbers,
+    currSelectedNumbers,
     selectMax,
     qtyOfNums,
     setSelectMax,
@@ -20,7 +20,7 @@ function NumberPickerOptions(props: NumberPickerOptionsProps) {
   } = props;
 
   useEffect(() => {
-    if (pickedNumbers.length > selectMax) {
+    if (currSelectedNumbers.length > selectMax) {
       reset();
     }
   });
@@ -41,8 +41,16 @@ function NumberPickerOptions(props: NumberPickerOptionsProps) {
     setSelectMax(Number((event.target as HTMLSelectElement).value));
   }
 
+  function handleSelectQty(event: React.ChangeEvent) {
+    setQtyOfNums(Number((event.target as HTMLSelectElement).value));
+  }
+
   return (
-    <div className="number-picker-options">
+    <div
+      className="number-picker-options"
+      role="group"
+      aria-label="lottery options"
+    >
       Choose
       <label htmlFor="quanity-to-select" className="sr-only">
         How many numbers to choose?
@@ -61,9 +69,7 @@ function NumberPickerOptions(props: NumberPickerOptionsProps) {
       <select
         id="quanity-of-total-numbers"
         value={qtyOfNums}
-        onChange={(event) => {
-          setQtyOfNums(Number(event.target.value));
-        }}
+        onChange={handleSelectQty}
       >
         {createNumberSelectOptions(selectMax + 1, 99)}
       </select>

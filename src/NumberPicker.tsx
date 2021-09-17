@@ -2,24 +2,29 @@ import ToggleButtonGroup from "./ToggleButtonGroup";
 import ToggleButton from "./ToggleButton";
 
 interface NumberPickerProps {
-  numbers: number;
-  selectedMax: number;
-  pickedNumbers: number[];
-  setPickedNumbers: (nums: number[]) => void;
+  qtyOfNums: number;
+  selectMax: number;
+  currSelectedNumbers: number[];
+  setCurrSelectedNumbers: (nums: number[]) => void;
 }
 
 function NumberPicker(props: NumberPickerProps) {
-  const { numbers, pickedNumbers, setPickedNumbers, selectedMax } = props;
+  const {
+    qtyOfNums,
+    currSelectedNumbers,
+    setCurrSelectedNumbers,
+    selectMax
+  } = props;
 
   function handleOnButtonClick(event: React.MouseEvent) {
     const numberButtonValue = Number((event.target as HTMLButtonElement).value);
-    const isSelected = pickedNumbers.includes(numberButtonValue);
-    if (pickedNumbers.length < selectedMax && !isSelected) {
-      setPickedNumbers([...pickedNumbers, numberButtonValue]);
+    const isSelected = currSelectedNumbers.includes(numberButtonValue);
+    if (currSelectedNumbers.length < selectMax && !isSelected) {
+      setCurrSelectedNumbers([...currSelectedNumbers, numberButtonValue]);
     } else {
       if (isSelected) {
-        setPickedNumbers(
-          pickedNumbers.filter((num) => {
+        setCurrSelectedNumbers(
+          currSelectedNumbers.filter((num) => {
             return num !== numberButtonValue;
           })
         );
@@ -38,7 +43,7 @@ function NumberPicker(props: NumberPickerProps) {
         <ToggleButton
           key={i}
           value={`${i}`}
-          pressed={pickedNumbers.includes(i)}
+          pressed={currSelectedNumbers.includes(i)}
           onClick={handleOnButtonClick}
         />
       );
@@ -49,9 +54,9 @@ function NumberPicker(props: NumberPickerProps) {
   return (
     <>
       <ToggleButtonGroup label="number picker" className="number-picker">
-        {createNumberPickerButtons(numbers)}
+        {createNumberPickerButtons(qtyOfNums)}
       </ToggleButtonGroup>
-      <p>Selected {pickedNumbers.length + " of " + selectedMax}</p>
+      <p>Selected {currSelectedNumbers.length + " of " + selectMax}</p>
     </>
   );
 }
