@@ -24,7 +24,8 @@ button {
 }
 .number-picker {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 3rem);
+  grid-template-columns: repeat(auto-fit, 3rem);
+  justify-content: center;
   gap: 0.5rem;
   max-width: 34.5rem;
   padding: 1rem;
@@ -73,4 +74,38 @@ button {
   margin: 0.25rem;
   box-shadow: 2px 4px 7px 0 rgba(0, 0, 0, 0.125);
   background: radial-gradient(at 30% 30%, #fff 25%, #bbb);
+}
+.matching-number {
+  background: radial-gradient(at 30% 30%, #fff 25%, #ccaa33);
+}
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-collapse: collapse;
+}
+.table caption {
+  font-size: 1.25rem;
+  font-weight: 700;
+  background-color: #ddd;
+  padding: 0.5rem;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.table th,
+.table td {
+  padding: 0.5rem;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+}
+.table th[scope="col"] {
+  background-color: #f6f6f6;
+}
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 1px solid #ddd;
+}
+.odds-table {
+  max-width: 34.5rem;
+  margin: 1.5rem auto;
 }
