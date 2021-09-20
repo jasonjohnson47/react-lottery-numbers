@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import getSelectMax from "./getSelectMax";
 
 interface NumberPickerOptionsProps {
   currSelectedNumbers: number[];
@@ -18,6 +19,8 @@ function NumberPickerOptions(props: NumberPickerOptionsProps) {
     setQtyOfNums,
     reset
   } = props;
+
+  let selectMaxHighest = getSelectMax(qtyOfNums);
 
   useEffect(() => {
     if (currSelectedNumbers.length > selectMax) {
@@ -42,7 +45,10 @@ function NumberPickerOptions(props: NumberPickerOptionsProps) {
   }
 
   function handleSelectQty(event: React.ChangeEvent) {
-    setQtyOfNums(Number((event.target as HTMLSelectElement).value));
+    const value = Number((event.target as HTMLSelectElement).value);
+    setQtyOfNums(value);
+    selectMaxHighest = getSelectMax(value);
+    setSelectMax(selectMaxHighest);
   }
 
   return (
@@ -60,7 +66,7 @@ function NumberPickerOptions(props: NumberPickerOptionsProps) {
         value={selectMax}
         onChange={handleSelectMax}
       >
-        {createNumberSelectOptions(1, qtyOfNums - 1)}
+        {createNumberSelectOptions(1, selectMaxHighest)}
       </select>
       out of
       <label htmlFor="quanity-of-total-numbers" className="sr-only">
@@ -71,7 +77,7 @@ function NumberPickerOptions(props: NumberPickerOptionsProps) {
         value={qtyOfNums}
         onChange={handleSelectQty}
       >
-        {createNumberSelectOptions(selectMax + 1, 99)}
+        {createNumberSelectOptions(2, 99)}
       </select>
       numbers
     </div>
