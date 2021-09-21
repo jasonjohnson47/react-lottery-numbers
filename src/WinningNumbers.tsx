@@ -47,7 +47,12 @@ function WinningNumbers(props: WinningNumbersProps) {
     });
   }
 
-  return <div className="winning-numbers">{printWinningNumbers()}</div>;
+  return (
+    <>
+      <h2 className="sr-only">Winning Numbers</h2>
+      <div className="winning-numbers">{printWinningNumbers()}</div>
+    </>
+  );
 }
 
 export default WinningNumbers;

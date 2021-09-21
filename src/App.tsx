@@ -1,6 +1,7 @@
 import { useState } from "react";
 import NumberPicker from "./NumberPicker";
 import NumberPickerOptions from "./NumberPickerOptions";
+import ActionButtons from "./ActionButtons";
 import WinningNumbers from "./WinningNumbers";
 import GameMessage from "./GameMessage";
 import Odds from "./Odds";
@@ -22,6 +23,10 @@ export default function App() {
     setWinningNumbers(generateLotteryNumbers(selectMax, qtyOfNums));
     setShowResults(true);
     setIsMakingSelections(false);
+  }
+
+  function quickPick() {
+    setCurrSelectedNumbers(generateLotteryNumbers(selectMax, qtyOfNums));
   }
 
   function reset() {
@@ -46,19 +51,13 @@ export default function App() {
         currSelectedNumbers={currSelectedNumbers}
         setCurrSelectedNumbers={setCurrSelectedNumbers}
       />
-      <div className="action-buttons">
-        <button type="button" className="btn" onClick={reset}>
-          Reset
-        </button>
-        <button
-          type="button"
-          className="btn"
-          onClick={playLotto}
-          disabled={currSelectedNumbers.length !== selectMax}
-        >
-          Play
-        </button>
-      </div>
+      <ActionButtons
+        reset={reset}
+        quickPick={quickPick}
+        playLotto={playLotto}
+        currSelectedNumbers={currSelectedNumbers}
+        selectMax={selectMax}
+      />
       {showResults ? (
         <WinningNumbers
           winningNumbers={winningNumbers}

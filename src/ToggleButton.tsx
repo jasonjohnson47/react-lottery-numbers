@@ -5,15 +5,15 @@ interface ToggleButtonProps {
 }
 
 function ToggleButton(props: ToggleButtonProps) {
-  const { value } = props;
+  const { value, pressed, onClick } = props;
 
   return (
     <button
       type="button"
       className="toggle-button"
       value={value}
-      aria-pressed={props.pressed}
-      onClick={props.onClick}
+      aria-pressed={pressed}
+      onClick={onClick}
     >
       {value}
     </button>
