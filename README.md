@@ -1,2 +1,3 @@
 # react-lottery-numbers
-Created with CodeSandbox
+
+Fun project as a learning experience. Very light on the styling.
